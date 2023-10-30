@@ -13,34 +13,34 @@ short_run <- TRUE
 assumptions <- "central"
 
 ## 1. severity_parsed_data
-orderly::orderly_run("severity_parsed_data",
-                     use_draft = "newer")
+orderly2::orderly_run("severity_parsed_data")
 
 ## 2. severity_parameters 
-orderly::orderly_run("severity_parameters", parameters = list(
-  deterministic = deterministic, assumptions = assumptions),
-  use_draft = "newer")
+orderly2::orderly_run(
+  "severity_parameters",
+  parameters = list(deterministic = deterministic, assumptions = assumptions))
 
 ## 3. severity_fits
-for (r in regions) {
-  orderly::orderly_run("severity_fits",
-                       parameters = list(region = r,
-                                         short_run = short_run,
-                                         deterministic = deterministic,
-                                         assumptions = assumptions),
-                       use_draft = "newer")
+for (r in sircovid::regions("england")) {
+  orderly2::orderly_run(
+    "severity_fits",
+    parameters = list(region = r,
+                      short_run = short_run,
+                      deterministic = deterministic,
+                      assumptions = assumptions))
 }
 
 
 ## 4. severity_fits_combined
-orderly::orderly_run("severity_fits_combined",
-                     parameters = list(short_run = short_run,
-                                       deterministic = deterministic,
-                                       assumptions = assumptions),
-                     use_draft = "newer")
+orderly2::orderly_run(
+  "severity_fits_combined",
+  parameters = list(short_run = short_run,
+                    deterministic = deterministic,
+                    assumptions = assumptions))
 
-## 5. severity_sensitivity_analysis
-orderly::orderly_run("severity_sensitivity_analysis",
-                     parameters = list(short_run = short_run,
-                                       deterministic = deterministic),
-                     use_draft = "newer")
+## 5. severity_sensitivity_analysis: running this requires all
+## assumptions to have been run!
+orderly2::orderly_run(
+  "severity_sensitivity_analysis",
+  parameters = list(short_run = short_run,
+                    deterministic = deterministic))

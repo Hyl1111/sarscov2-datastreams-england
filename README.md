@@ -22,9 +22,9 @@ The core requirement is our [sircovid](https://mrc-ide.github.io/sircovid/) pack
 
 ```r
 remotes::install_github(c(
-  "mrc-ide/dust@v0.13.2",
+  "mrc-ide/dust@v0.14.0",
   "mrc-ide/mcstate@v0.9.14",
-  "mrc-ide/sircovid@0.14.11",
+  "mrc-ide/sircovid@v0.14.13",
   "mrc-ide/spimalot@v0.8.24"))
 ```
 
@@ -35,11 +35,10 @@ drat:::add("ncov-ic")
 install.packages(c("sircovid", "spimalot"))
 ```
 
-You will also need a recent [orderly](https://www.vaccineimpact.org/orderly/) which can be installed with
+You will also need a recent [orderly2](https://mrc-ide.github.io/orderly2) which can be installed with
 
 ```r
-drat:::add("vimc")
-install.packages("orderly")
+remotes::install_github("mrc-ide/orderly2")
 ```
 
 ## License

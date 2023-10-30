@@ -1,3 +1,32 @@
+orderly2::orderly_parameters(region = NULL, deterministic = FALSE, short_run = FALSE, assumptions = "central")
+
+orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
+
+orderly2::orderly_dependency(
+  "severity_parsed_data",
+  "latest",
+  c("data/england_region_data.csv" = "outputs/england_region_data.csv",
+    "data/serology.csv" = "outputs/serology_for_inference.csv"))
+orderly2::orderly_dependency(
+  "severity_parameters",
+  "latest(parameter:assumptions == this:assumptions && parameter:deterministic == this:deterministic)",
+  c("parameters/base.rds" = "parameters_base.rds",
+    "parameters/info.csv" = "parameters_info.csv",
+    "parameters/prior.csv" = "parameters_prior.csv",
+    "parameters/proposal.csv" = "parameters_proposal.csv",
+    "parameters/transform.R" = "parameters_transform.R"))
+
+orderly2::orderly_artefact("pMCMC trace plots", "outputs/pmcmc_traceplots.pdf")
+orderly2::orderly_artefact("pMCMC trace plots multipage", "outputs/pmcmc_traceplots_separate.pdf")
+orderly2::orderly_artefact("PMCMC results for combined task", "outputs/fit.rds")
+
+library(sircovid)
+library(spimalot)
+library(tidyr)
+
+orderly2::orderly_resource("data.R")
+source("data.R")
+
 source("global_util.R")
 
 version_check("sircovid", "0.14.11")
