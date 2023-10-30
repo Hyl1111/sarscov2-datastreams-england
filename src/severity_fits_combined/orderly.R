@@ -1,3 +1,93 @@
+orderly2::orderly_parameters(short_run = FALSE, deterministic = FALSE, assumptions = "central")
+
+orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
+
+orderly2::orderly_resource("paper_numbers.Rmd")
+
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "london" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/london/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_london.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_london_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "east_of_england" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/east_of_england/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_east_of_england.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_east_of_england_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "midlands" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/midlands/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_midlands.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_midlands_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "north_east_and_yorkshire" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/north_east_and_yorkshire/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_north_east_and_yorkshire.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_north_east_and_yorkshire_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "north_west" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/north_west/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_north_west.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_north_west_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "south_east" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/south_east/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_south_east.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_south_east_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_fits",
+  'latest(parameter:region == "south_west" && parameter:assumptions == this:assumptions && parameter:short_run == this:short_run && parameter:deterministic == this:deterministic)',
+  c("regional_results/south_west/fit.rds" = "outputs/fit.rds",
+    "regional_figs/pmcmc_traceplots_south_west.pdf" = "outputs/pmcmc_traceplots.pdf",
+    "regional_figs/multipage/pmcmc_traceplots_south_west_separate.pdf" = "outputs/pmcmc_traceplots_separate.pdf"))
+orderly2::orderly_dependency(
+  "severity_parsed_data",
+  "latest",
+  c(severity_data.csv = "outputs/severity_data.csv",
+    hfr_week.csv = "outputs/hfr_week.csv",
+    england_region_data.csv = "outputs/england_region_data.csv",
+    outcomes_vacc_status.csv = "outputs/outcomes_vacc_status.csv"))
+
+orderly2::orderly_artefact("Paper numbers", "paper_numbers.html")
+orderly2::orderly_artefact(
+  "Files for external reviews",
+  c("outputs/parameters/proposal.csv", "outputs/parameters/prior.csv", "outputs/parameters/info.csv", "outputs/model_demography.rds", "regional_results/Rt_england.rds", "regional_results/Rt_all.rds", "outputs/aggregated_data.rds", "outputs/intrinsic_severity.csv", "outputs/national_severity.rds"))
+orderly2::orderly_artefact("Files for forward simulation", "outputs/combined.rds")
+orderly2::orderly_artefact(
+  "regional fitting plots and projections for comparison",
+  c("figs/beta.png", "figs/cumulative_attack_rate.png", "figs/data_fits.png", "figs/forest_plot_betas.png", "figs/forest_plot_misc.png", "figs/forest_plot_variants.png", "figs/forest_plot_tv_severity.png", "figs/incidence.png", "figs/incidence_per_1000.png", "figs/infections_per_strain.png", "figs/pillar2_all_ages.png", "figs/pillar2_over25.png", "figs/prevalence_react.png", "figs/prevalence_ons.png", "figs/Rt_eff_general.png", "figs/Rt_general.png", "figs/serology_euroimmun.png", "figs/serology_roche_n.png", "figs/status_effective_susceptible.png", "figs/status_infection.png", "figs/status_vaccine.png", "figs/variant_Wildtype_Alpha.png", "figs/variant_Alpha_Delta.png", "figs/variant_Delta_Omicron.png", "figs/mu_D.png", "figs/traceplot_east_of_england.png", "figs/traceplot_london.png", "figs/traceplot_midlands.png", "figs/traceplot_north_east_and_yorkshire.png", "figs/traceplot_north_west.png", "figs/traceplot_south_east.png", "figs/traceplot_south_west.png", "figs_by_age/pillar2_0_14.png", "figs_by_age/pillar2_15_24.png", "figs_by_age/pillar2_25_49.png", "figs_by_age/pillar2_50_64.png", "figs_by_age/pillar2_65_79.png", "figs_by_age/pillar2_80_plus.png", "figs_by_age/deaths_hosp_0_49.png", "figs_by_age/deaths_hosp_50_54.png", "figs_by_age/deaths_hosp_55_59.png", "figs_by_age/deaths_hosp_60_64.png", "figs_by_age/deaths_hosp_65_69.png", "figs_by_age/deaths_hosp_70_74.png", "figs_by_age/deaths_hosp_75_79.png", "figs_by_age/deaths_hosp_80_plus.png", "figs_by_age/deaths_comm_0_49.png", "figs_by_age/deaths_comm_50_54.png", "figs_by_age/deaths_comm_55_59.png", "figs_by_age/deaths_comm_60_64.png", "figs_by_age/deaths_comm_65_69.png", "figs_by_age/deaths_comm_70_74.png", "figs_by_age/deaths_comm_75_79.png", "figs_by_age/deaths_comm_80_plus.png", "figs_by_age/admissions_0_9.png", "figs_by_age/admissions_10_19.png", "figs_by_age/admissions_20_29.png", "figs_by_age/admissions_30_39.png", "figs_by_age/admissions_40_49.png", "figs_by_age/admissions_50_59.png", "figs_by_age/admissions_60_69.png", "figs_by_age/admissions_70_79.png", "figs_by_age/admissions_80_plus.png", "figs_by_age/react_5_24.png", "figs_by_age/react_25_34.png", "figs_by_age/react_35_44.png", "figs_by_age/react_45_54.png", "figs_by_age/react_55_64.png", "figs_by_age/react_65_plus.png", "zoomed_view/regions.png", "zoomed_view/prevalence_ons.png", "zoomed_view/prevalence_react.png", "zoomed_view/pillar2_over25.png", "paper_plots/paper_figure_1.png", "paper_plots/paper_figure_2.png", "paper_plots/suppl_age_heatmaps.png", "paper_plots/suppl_compare_demography.png", "paper_plots/suppl_emergence_demography.png", "paper_plots/suppl_compare_hfr.png", "paper_plots/suppl_sev_winter_20_21.png", "paper_plots/suppl_regional_intrinsic.png", "paper_plots/suppl_deaths_hosp_age.png", "paper_plots/suppl_deaths_comm_age.png", "paper_plots/suppl_hosp_adm_age.png", "paper_plots/suppl_inf_prev_age.png", "paper_plots/suppl_pillar2_age.png", "paper_plots/suppl_admissions_vacc.png", "paper_plots/suppl_deaths_vacc.png"))
+
+library(sircovid)
+library(spimalot)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(data.table)
+library(jtools)
+library(patchwork)
+library(reshape2)
+library(DescTools)
+library(ggrepel)
+library(stringr)
+library(lubridate)
+library(ggtext)
+library(car)
+
+orderly2::orderly_resource("support_paper_plots.R")
+orderly2::orderly_resource("support_data.R")
+orderly2::orderly_resource("supplement_plots.R")
+orderly2::orderly_resource("plot_mu_D.R")
+source("support_paper_plots.R")
+source("support_data.R")
+source("supplement_plots.R")
+source("plot_mu_D.R")
+
 source("global_util.R")
 
 version_check("sircovid", "0.14.11")
