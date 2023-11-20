@@ -224,7 +224,7 @@ apply_assumptions <- function(baseline, assumptions) {
 ## This will get simplified considerably once we drop the previous
 ## two-stage fitting; that will be needed to bring in 3 and 4 stage
 ## fitting really.
-make_transform <- function(baseline) {
+make_transform <- function(baseline, date = NULL) {
   
   expected <- c("date", "model_type", "region", "restart_date", "epoch_dates",
                 "intrinsic_severity_dates", "strain_epochs",
@@ -299,6 +299,10 @@ make_transform <- function(baseline) {
     stopifnot(setequal(expected, names(pars)))
     beta_value <- unname(pars[baseline$beta_names])
     pars <- as.list(pars) # using list access below
+    
+    if (is.null(date)) {
+      date <- baseline$date
+    }
 
     progression <- compute_progression(pars, baseline$progression_data)
     severity <- compute_severity(pars, baseline$severity_data, assumptions)
@@ -508,25 +512,38 @@ make_transform <- function(baseline) {
       
     }
     
+    date <- sircovid_date(date)
     p1 <- stage_parameters("Wildtype", 0)
-    p2 <- stage_parameters("Wildtype_Alpha", 0)
-    p3 <- stage_parameters("Wildtype_Alpha", 2)
-    p4 <- stage_parameters("Alpha_Delta", 2)
-    p5 <- stage_parameters("Alpha_Delta", 3)
-    p6 <- stage_parameters("Delta_Omicron", 3)
+    if (date < epoch_dates[1]) {
+      ret <- p1
+    } else {
+      p2 <- stage_parameters("Wildtype_Alpha", 0)
+      epochs <- list(mcstate::multistage_epoch(
+        epoch_dates[1], p2, sircovid::inflate_state_strains))
+      if (date >= epoch_dates[2]) {
+        p3 <- stage_parameters("Wildtype_Alpha", 2)
+        epochs <- append(epochs, list(mcstate::multistage_epoch(
+          epoch_dates[2], p3, sircovid::inflate_state_vacc_classes)))
+      }
+      if (date >= epoch_dates[3]) {
+        p4 <- stage_parameters("Alpha_Delta", 2)
+        epochs <- append(epochs, list(mcstate::multistage_epoch(
+          epoch_dates[3], p4, sircovid::rotate_strains)))
+                    
+      }
+      if (date >= epoch_dates[4]) {
+        p5 <- stage_parameters("Alpha_Delta", 3)
+        epochs <- append(epochs, list(mcstate::multistage_epoch(
+          epoch_dates[4], p5, sircovid::inflate_state_vacc_classes)))
+      }
+      if (date >= epoch_dates[5]) {
+        p6 <- stage_parameters("Delta_Omicron", 3)
+        epochs <- append(epochs, list(mcstate::multistage_epoch(
+          epoch_dates[5], p6, sircovid::rotate_strains)))
+      }
+      ret <- mcstate::multistage_parameters(p1, epochs = epochs)
+    }
 
-    epochs <- list(
-      mcstate::multistage_epoch(
-        epoch_dates[1], p2, sircovid::inflate_state_strains),
-      mcstate::multistage_epoch(
-        epoch_dates[2], p3, sircovid::inflate_state_vacc_classes),
-      mcstate::multistage_epoch(
-        epoch_dates[3], p4, sircovid::rotate_strains),
-      mcstate::multistage_epoch(
-        epoch_dates[4], p5, sircovid::inflate_state_vacc_classes),
-      mcstate::multistage_epoch(
-        epoch_dates[5], p6, sircovid::rotate_strains)
-      )
-    mcstate::multistage_parameters(p1, epochs = epochs)
+    ret
   }
 }
