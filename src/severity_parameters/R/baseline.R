@@ -84,7 +84,7 @@ create_baseline <- function(region, date, restart_date,
       "2022-01-04", ## 33. Schools return from X-mas holidays
       "2022-01-19", ## 34. Announcement of end of Plan B
       "2022-01-27", ## 35. End of Plan B
-      as.character(as.Date(date))) ## 36. "2022-02-24",
+      "2022-02-24") ## 36. End date
   ## End of self-isolation in England
   
   ## Validate beta_date
@@ -474,9 +474,9 @@ create_baseline <- function(region, date, restart_date,
                         "2020-12-08",
                         "2021-09-15")
   vaccination <- 
-    spimalot::spim_vaccination_data(date, region, vaccine_uptake, 
-                                    vaccine_days_to_effect, data_vaccination,
-                                    n_doses, dose_start_dates,
+    spimalot::spim_vaccination_data(as.Date("2022-02-24"), region,
+                                    vaccine_uptake, vaccine_days_to_effect,
+                                    data_vaccination, n_doses, dose_start_dates,
                                     carehomes = FALSE)
   
   vaccine_schedule_real <- vaccination$schedule

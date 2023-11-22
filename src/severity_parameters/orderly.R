@@ -1,4 +1,4 @@
-orderly2::orderly_parameters(assumptions = "central", deterministic = FALSE)
+orderly2::orderly_parameters(assumptions = "central", deterministic = TRUE)
 
 orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
 
@@ -37,8 +37,8 @@ source("R/vaccine.R")
 
 source("global_util.R")
 
-version_check("sircovid", "0.14.11")
-version_check("spimalot", "0.8.23")
+version_check("sircovid", "0.15.0")
+version_check("spimalot", "0.8.25")
 
 ## Define date at which the data is capped for analysis
 date <- "2022-02-24"

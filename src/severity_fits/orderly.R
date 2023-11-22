@@ -1,4 +1,4 @@
-orderly2::orderly_parameters(region = NULL, deterministic = FALSE, short_run = FALSE, assumptions = "central")
+orderly2::orderly_parameters(region = "london", deterministic = TRUE, short_run = TRUE, assumptions = "central")
 
 orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
 
@@ -25,12 +25,14 @@ library(spimalot)
 library(tidyr)
 
 orderly2::orderly_resource("data.R")
+orderly2::orderly_resource("support.R")
 source("data.R")
+source("support.R")
 
 source("global_util.R")
 
-version_check("sircovid", "0.14.11")
-version_check("spimalot", "0.8.23")
+version_check("sircovid", "0.15.0")
+version_check("spimalot", "0.8.25")
 
 date <- "2022-02-24"
 
@@ -59,6 +61,7 @@ region <- spimalot::spim_check_region(region, multiregion = FALSE)
 
 pars <- spimalot::spim_fit_pars_load("parameters", region, assumptions,
                                      kernel_scaling)
+pars <- simplify_transform(pars, "parameters", date)
 
 restart_date <- readRDS("parameters/base.rds")[[region[[1]]]]$restart_date
 
