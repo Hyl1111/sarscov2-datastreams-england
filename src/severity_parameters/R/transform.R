@@ -226,7 +226,8 @@ apply_assumptions <- function(baseline, assumptions) {
 ## fitting really.
 make_transform <- function(baseline, date = NULL) {
   
-  expected <- c("date", "model_type", "region", "restart_date", "epoch_dates",
+  expected <- c("date", "model_type", "region", "assumptions",
+                "restart_date", "epoch_dates",
                 "intrinsic_severity_dates", "strain_epochs",
                 "beta_date", "beta_names", "pillar2_age_bands",
                 "severity_data", "progression_data",
@@ -289,7 +290,7 @@ make_transform <- function(baseline, date = NULL) {
                 paste0("p_NC_", baseline$pillar2_age_bands),
                 paste0("p_NC_weekend_", baseline$pillar2_age_bands),
                 "rho_pillar2_tests")
-  if (assumptions == "mu_d_summer") {
+  if (baseline$assumptions == "mu_d_summer") {
     expected <- c(expected, "mu_D_6")
   }
 
@@ -305,7 +306,8 @@ make_transform <- function(baseline, date = NULL) {
     }
 
     progression <- compute_progression(pars, baseline$progression_data)
-    severity <- compute_severity(pars, baseline$severity_data, assumptions)
+    severity <- compute_severity(pars, baseline$severity_data,
+                                 baseline$assumptions)
     observation <- compute_observation(pars, baseline$pillar2_age_bands,
                                        baseline$region)
 
@@ -512,7 +514,7 @@ make_transform <- function(baseline, date = NULL) {
       
     }
     
-    date <- sircovid_date(date)
+    date <- sircovid::sircovid_date(date)
     p1 <- stage_parameters("Wildtype", 0)
     if (date < epoch_dates[1]) {
       ret <- p1
