@@ -14,6 +14,8 @@ simplify_transform <- function(pars, path, date) {
     pars$base$epoch_dates[pars$base$epoch_dates <= sircovid_date(date)]
   keep_strain_epochs <- pars$base$strain_epochs <= length(pars$base$epoch_dates)
   pars$base$strain_epochs <- pars$base$strain_epochs[keep_strain_epochs]
+  browser()
+  pars$base$date
   
   pars
 }
