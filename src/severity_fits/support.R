@@ -1,5 +1,5 @@
 simplify_transform <- function(pars, path, date) {
-  browser()
+  
   e <- new.env()
   sys.source(file.path(path, "transform.R"), e)
   
