@@ -120,23 +120,27 @@ model_demography <-
 saveRDS(model_demography, "outputs/model_demography.rds")
 write_csv(dat$intrinsic_severity, "outputs/intrinsic_severity.csv")
 
-par_names <- unique(dat$parameters$proposal$name)
-subset_variants <- c("ta_alpha", "rel_p_H_alpha",
-                     "rel_p_ICU_alpha", "rel_p_D_alpha",
-                     "ta_delta", "rel_p_H_delta",
-                     "rel_p_ICU_delta",  "rel_p_D_delta",
-                     "ta_omicron", "rel_p_ICU_omicron",
-                     "rel_p_H_omicron", "rel_p_D_omicron")
-subset_tv_severity <- c("mu_D", "mu_D_5", "p_H",
-                        "mu_D_2", "p_H_D", "p_H_2",
-                        "mu_D_3", "p_ICU_D", "p_ICU",
-                        "mu_D_4", "p_W_D", "p_ICU_2")
+par_names <- colnames(dat$samples[[1]]$pars)
+
+subset_variants <- intersect(par_names,
+                             c("ta_alpha", "rel_p_H_alpha",
+                               "rel_p_ICU_alpha", "rel_p_D_alpha",
+                               "ta_delta", "rel_p_H_delta",
+                               "rel_p_ICU_delta",  "rel_p_D_delta",
+                               "ta_omicron", "rel_p_ICU_omicron",
+                               "rel_p_H_omicron", "rel_p_D_omicron"))
+subset_tv_severity <- intersect(par_names, 
+                                c("mu_D", "mu_D_5", "p_H",
+                                  "mu_D_2", "p_H_D", "p_H_2",
+                                  "mu_D_3", "p_ICU_D", "p_ICU",
+                                  "mu_D_4", "p_W_D", "p_ICU_2"))
 subset_misc <-   
   setdiff(grep("^beta", par_names, value = TRUE, invert = TRUE),
           c(subset_variants, subset_tv_severity))
 seed_dates <- c("start_date", "seed_date_alpha", "seed_date_delta",
                 "seed_date_omicron")
-subset_misc <- c(seed_dates, setdiff(subset_misc, seed_dates))
+subset_misc <- intersect(par_names,
+                         c(seed_dates, setdiff(subset_misc, seed_dates)))
 par_labels <- forest_plot_labels(dat)
 
 ## Add traceplots
@@ -148,7 +152,7 @@ for (r in sircovid::regions("england")) {
 
 write_png("figs/forest_plot_variants.png", width = 1600, height = 1600, res = 200,
           spim_plot_forest(
-            dat, plot_type = "subset", nrow = 3,
+            dat, plot_type = "subset", nrow = length(subset_variants) / 4,
             subset = subset_variants,
             par_labels = par_labels))
 
