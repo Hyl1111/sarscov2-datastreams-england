@@ -34,7 +34,7 @@ source("global_util.R")
 version_check("sircovid", "0.15.0")
 version_check("spimalot", "0.8.25")
 
-date <- "2022-02-24"
+date <- "2021-03-07"
 
 ## We're effectively NOT trimming any data stream as backfill is not an issue here
 trim_deaths <- 0
@@ -62,6 +62,10 @@ region <- spimalot::spim_check_region(region, multiregion = FALSE)
 pars <- spimalot::spim_fit_pars_load("parameters", region, assumptions,
                                      kernel_scaling)
 pars <- simplify_transform(pars, "parameters", date)
+
+## Fix all unused parameters
+## (parameters not impacting fitting before the date parameter)
+pars <- fix_unused_parameters(pars, date)
 
 restart_date <- readRDS("parameters/base.rds")[[region[[1]]]]$restart_date
 
