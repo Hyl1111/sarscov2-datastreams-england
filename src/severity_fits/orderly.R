@@ -111,6 +111,7 @@ data_inputs <- list(rtm = data_rtm,
 
 dat <- spimalot::spim_fit_process(samples, pars, data_inputs,
                                   control$particle_filter)
+dat <- add_full_proposal(dat, pars)
 
 dir.create("outputs", FALSE, TRUE)
 saveRDS(dat$fit, "outputs/fit.rds")

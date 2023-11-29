@@ -95,3 +95,21 @@ fix_unused_parameters <- function(pars, date) {
   
   pars
 }
+
+add_full_proposal <- function(dat, pars) {
+  
+  new_prop <- dat$fit$parameters$proposal
+  old_prop <- pars$proposal
+  
+  new_prop_pars <- new_prop$name
+  
+  full_prop <- data.frame(0 * old_prop)
+  full_prop[new_prop_pars, new_prop_pars] <- new_prop[, -c(1, 2)]
+  full_prop <- cbind(data.frame(region = dat$fit$samples$info$region,
+                                name = rownames(full_prop)),
+                     full_prop)
+  rownames(full_prop) <- NULL
+  dat$fit$parameters$proposal <- full_prop
+  
+  dat
+}
