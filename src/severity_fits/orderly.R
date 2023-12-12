@@ -63,6 +63,10 @@ pars <- spimalot::spim_fit_pars_load("parameters", region, assumptions,
                                      kernel_scaling)
 pars <- simplify_transform(pars, "parameters", date)
 
+## Fix all unused parameters
+## (parameters not impacting fitting before the date parameter)
+pars <- fix_unused_parameters(pars, date)
+
 restart_date <- readRDS("parameters/base.rds")[[region[[1]]]]$restart_date
 
 ## NOTE: only currently using compiled compare for the deterministic
@@ -107,6 +111,7 @@ data_inputs <- list(rtm = data_rtm,
 
 dat <- spimalot::spim_fit_process(samples, pars, data_inputs,
                                   control$particle_filter)
+dat <- add_full_proposal(dat, pars)
 
 dir.create("outputs", FALSE, TRUE)
 saveRDS(dat$fit, "outputs/fit.rds")
