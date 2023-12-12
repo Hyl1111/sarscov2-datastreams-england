@@ -34,7 +34,7 @@ source("global_util.R")
 version_check("sircovid", "0.15.0")
 version_check("spimalot", "0.8.25")
 
-date <- "2021-02-24"
+date <- "2022-02-24"
 
 ## We're effectively NOT trimming any data stream as backfill is not an issue here
 trim_deaths <- 0
