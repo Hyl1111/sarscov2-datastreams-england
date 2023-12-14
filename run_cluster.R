@@ -11,6 +11,7 @@ orderly2::orderly_run("severity_parameters",
 ## ---------------------------
 
 ## 1. Context ----
+setwd(orderly2:::orderly_src_root(NULL, TRUE))
 packages <- c("sircovid", "lubridate", "coda", "tidyr", "ggplot2",
               "viridisLite", "orderly2", 'vaultr', 'readxl', "ggtext",
               'abind', 'here', "mcstate", "dust", "spimalot", "purrr",
