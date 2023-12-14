@@ -1,10 +1,10 @@
-load_mcmc_parameters <- function(assumptions, deterministic) {
+load_mcmc_parameters <- function(data_changed, deterministic) {
 
-  message(sprintf("Assumptions are with '%s' parameters", assumptions))
+  message(sprintf("Parameters are for '%s' fit", data_changed))
   message(sprintf("Model will be run in the '%s' mode",
                   if (deterministic) "deterministic" else "stochastic"))
   
-  path_pars <- file.path("pars", assumptions,
+  path_pars <- file.path("pars", data_changed,
                          if (deterministic) "deterministic" else "stochastic")
 
   info <- read_csv(file.path(path_pars, "info.csv"))

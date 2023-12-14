@@ -10,7 +10,7 @@ short_run <- TRUE
 # delta_ve_high, delta_ve_low
 # mu_d_winter, mu_d_summer
 # fixed_si_high, fixed_si_low
-assumptions <- "central"
+data_changed <- "original"
 
 ## 1. severity_parsed_data
 orderly2::orderly_run("severity_parsed_data")
@@ -18,7 +18,7 @@ orderly2::orderly_run("severity_parsed_data")
 ## 2. severity_parameters 
 orderly2::orderly_run(
   "severity_parameters",
-  parameters = list(deterministic = deterministic, assumptions = assumptions))
+  parameters = list(deterministic = deterministic, data_changed = data_changed))
 
 ## 3. severity_fits
 for (r in sircovid::regions("england")) {
@@ -27,7 +27,7 @@ for (r in sircovid::regions("england")) {
     parameters = list(region = r,
                       short_run = short_run,
                       deterministic = deterministic,
-                      assumptions = assumptions))
+                      data_changed = data_changed))
 }
 
 
@@ -36,11 +36,9 @@ orderly2::orderly_run(
   "severity_fits_combined",
   parameters = list(short_run = short_run,
                     deterministic = deterministic,
-                    assumptions = assumptions))
+                    data_changed = data_changed))
 
-## 5. severity_sensitivity_analysis: running this requires all
-## assumptions to have been run!
+## 5. severity_fits_comparison
 orderly2::orderly_run(
-  "severity_sensitivity_analysis",
-  parameters = list(short_run = short_run,
-                    deterministic = deterministic))
+  "severity_fits_comparison",
+  parameters = list(short_run = short_run))
