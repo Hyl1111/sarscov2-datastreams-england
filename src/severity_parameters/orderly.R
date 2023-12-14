@@ -1,8 +1,16 @@
-orderly2::orderly_parameters(assumptions = "central", deterministic = TRUE)
+orderly2::orderly_parameters(data_changed = "original", deterministic = TRUE)
 
 orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
 
-orderly2::orderly_resource(c("pars/alpha_ve_high/deterministic/info.csv", "pars/alpha_ve_high/deterministic/proposal.csv", "pars/alpha_ve_high/stochastic/info.csv", "pars/alpha_ve_high/stochastic/proposal.csv", "pars/alpha_ve_low/deterministic/info.csv", "pars/alpha_ve_low/deterministic/proposal.csv", "pars/alpha_ve_low/stochastic/info.csv", "pars/alpha_ve_low/stochastic/proposal.csv", "pars/booster_ve_high/deterministic/info.csv", "pars/booster_ve_high/deterministic/proposal.csv", "pars/booster_ve_high/stochastic/info.csv", "pars/booster_ve_high/stochastic/proposal.csv", "pars/booster_ve_low/deterministic/info.csv", "pars/booster_ve_low/deterministic/proposal.csv", "pars/booster_ve_low/stochastic/info.csv", "pars/booster_ve_low/stochastic/proposal.csv", "pars/central/deterministic/info.csv", "pars/central/deterministic/proposal.csv", "pars/central/stochastic/info.csv", "pars/central/stochastic/proposal.csv", "pars/crim_death_high/deterministic/info.csv", "pars/crim_death_high/deterministic/proposal.csv", "pars/crim_death_high/stochastic/info.csv", "pars/crim_death_high/stochastic/proposal.csv", "pars/crim_death_low/deterministic/info.csv", "pars/crim_death_low/deterministic/proposal.csv", "pars/crim_death_low/stochastic/info.csv", "pars/crim_death_low/stochastic/proposal.csv", "pars/crim_hospi_high/deterministic/info.csv", "pars/crim_hospi_high/deterministic/proposal.csv", "pars/crim_hospi_high/stochastic/info.csv", "pars/crim_hospi_high/stochastic/proposal.csv", "pars/crim_hospi_low/deterministic/info.csv", "pars/crim_hospi_low/deterministic/proposal.csv", "pars/crim_hospi_low/stochastic/info.csv", "pars/crim_hospi_low/stochastic/proposal.csv", "pars/crim_infect_high/deterministic/info.csv", "pars/crim_infect_high/deterministic/proposal.csv", "pars/crim_infect_high/stochastic/info.csv", "pars/crim_infect_high/stochastic/proposal.csv", "pars/crim_infect_low/deterministic/info.csv", "pars/crim_infect_low/deterministic/proposal.csv", "pars/crim_infect_low/stochastic/info.csv", "pars/crim_infect_low/stochastic/proposal.csv", "pars/delta_ve_high/deterministic/info.csv", "pars/delta_ve_high/deterministic/proposal.csv", "pars/delta_ve_high/stochastic/info.csv", "pars/delta_ve_high/stochastic/proposal.csv", "pars/delta_ve_low/deterministic/info.csv", "pars/delta_ve_low/deterministic/proposal.csv", "pars/delta_ve_low/stochastic/info.csv", "pars/delta_ve_low/stochastic/proposal.csv", "pars/fixed_si_high/deterministic/info.csv", "pars/fixed_si_high/deterministic/proposal.csv", "pars/fixed_si_high/stochastic/info.csv", "pars/fixed_si_high/stochastic/proposal.csv", "pars/fixed_si_low/deterministic/info.csv", "pars/fixed_si_low/deterministic/proposal.csv", "pars/fixed_si_low/stochastic/info.csv", "pars/fixed_si_low/stochastic/proposal.csv", "pars/mu_d_summer/deterministic/info.csv", "pars/mu_d_summer/deterministic/proposal.csv", "pars/mu_d_summer/stochastic/info.csv", "pars/mu_d_summer/stochastic/proposal.csv", "pars/mu_d_winter/deterministic/info.csv", "pars/mu_d_winter/deterministic/proposal.csv", "pars/mu_d_winter/stochastic/info.csv", "pars/mu_d_winter/stochastic/proposal.csv", "data/vaccine_efficacy_alpha.csv", "data/vaccine_efficacy_delta.csv", "data/vaccine_efficacy_omicron.csv", "data/vaccine_uptake.csv", "data/support_severity.csv"))
+orderly2::orderly_resource(c("pars/original/deterministic/info.csv",
+                             "pars/original/deterministic/proposal.csv",
+                             "pars/original/stochastic/info.csv",
+                             "pars/original/stochastic/proposal.csv",
+                             "data/vaccine_efficacy_alpha.csv",
+                             "data/vaccine_efficacy_delta.csv",
+                             "data/vaccine_efficacy_omicron.csv",
+                             "data/vaccine_uptake.csv",
+                             "data/support_severity.csv"))
 
 orderly2::orderly_dependency(
   "severity_parsed_data",
@@ -42,6 +50,7 @@ version_check("spimalot", "0.8.25")
 
 ## Define date at which the data is capped for analysis
 date <- "2022-02-24"
+assumptions <- "central"
 
 ## Five epochs after starting with a single strain model (without vaccination)
 ## * mid August 2020: Alpha appears, expand strains
@@ -54,7 +63,7 @@ epoch_dates <- c("2020-09-17", "2020-12-07", "2021-03-08", "2021-09-14", "2021-1
 
 ## Load all parameters from the last run; creates priors, and updates
 ## new entries into the proposal matrix as needed.
-pars <- load_mcmc_parameters(assumptions, deterministic)
+pars <- load_mcmc_parameters(data_changed, deterministic)
 
 ## The baselines are always region-specific
 regions <- sircovid::regions("england")

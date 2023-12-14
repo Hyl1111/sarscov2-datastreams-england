@@ -113,3 +113,7 @@ add_full_proposal <- function(dat, pars) {
   
   dat
 }
+
+change_data <- function(data, data_changed) {
+  data
+}

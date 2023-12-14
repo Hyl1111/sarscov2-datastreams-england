@@ -4,13 +4,14 @@ orderly2::orderly_run("severity_parsed_data")
 ## 2. severity_parameters 
 orderly2::orderly_run("severity_parameters", 
                       parameters = list(deterministic = TRUE,
-                                        assumptions = "central"))
+                                        data_changed = "original"))
 
 ## ---------------------------
 ## Run in the cluster
 ## ---------------------------
 
 ## 1. Context ----
+setwd(orderly2:::orderly_src_root(NULL, TRUE))
 packages <- c("sircovid", "lubridate", "coda", "tidyr", "ggplot2",
               "viridisLite", "orderly2", 'vaultr', 'readxl', "ggtext",
               'abind', 'here', "mcstate", "dust", "spimalot", "purrr",
@@ -39,7 +40,7 @@ fits <-
                                      parameters = list(region = x,
                                                        short_run = TRUE,
                                                        deterministic = TRUE,
-                                                       assumptions = "central"))})
+                                                       data_changed = "original"))})
 batch <- fits$name
 
 ## Collect results
@@ -49,7 +50,7 @@ res <- obj$task_bundle_get(batch)$results()
 combined <- obj$enqueue(orderly2::orderly_run('severity_fits_combined',
                                               parameters = list(short_run = TRUE,
                                                                 deterministic = TRUE,
-                                                                assumptions = "central")))
+                                                                data_changed = "original")))
 combined_result <- combined$result()
 
 #----
@@ -62,7 +63,7 @@ fits <-
                                      parameters = list(region = x,
                                                        short_run = FALSE,
                                                        deterministic = TRUE,
-                                                       assumptions = "central"))})
+                                                       data_changed = "original"))})
 batch <- fits$name
 
 ## Collect results
@@ -72,5 +73,5 @@ res <- obj$task_bundle_get(batch)$results()
 combined <- obj$enqueue(orderly2::orderly_run('severity_fits_combined',
                                               parameters = list(short_run = FALSE,
                                                                 deterministic = TRUE,
-                                                                assumptions = "central")))
+                                                                data_changed = "original")))
 combined_result <- combined$result()
