@@ -1,4 +1,4 @@
-orderly2::orderly_parameters(region = "london", deterministic = TRUE, short_run = TRUE, data_changed = "original")
+orderly2::orderly_parameters(region = "london", deterministic = TRUE, short_run = TRUE, data_changed = "original",change_rate = 1)
 
 orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
 
@@ -87,7 +87,7 @@ data <- spim_data(
   date, region, data_rtm, data_serology, trim_deaths, trim_pillar2,
   adm_backfill_date, trim_pillar2_date, full_data = FALSE)
 
-data <- change_data(data, data_changed)
+data <- change_data(data, data_changed, change_rate)
 
 filter <- spimalot::spim_particle_filter(data, pars$mcmc,
                                          control$particle_filter,

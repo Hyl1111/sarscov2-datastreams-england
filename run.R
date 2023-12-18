@@ -10,7 +10,8 @@ short_run <- TRUE
 # delta_ve_high, delta_ve_low
 # mu_d_winter, mu_d_summer
 # fixed_si_high, fixed_si_low
-data_changed <- "original"
+data_changed <- "deaths_hosp"
+change_rate <- 1
 
 ## 1. severity_parsed_data
 orderly2::orderly_run("severity_parsed_data")
@@ -27,7 +28,8 @@ for (r in sircovid::regions("england")) {
     parameters = list(region = r,
                       short_run = short_run,
                       deterministic = deterministic,
-                      data_changed = data_changed))
+                      data_changed = data_changed,
+                      change_rate=change_rate))
 }
 
 
