@@ -16,7 +16,8 @@ packages <- c("sircovid", "lubridate", "coda", "tidyr", "ggplot2",
               "viridisLite", "orderly2", 'vaultr', 'readxl', "ggtext",
               'abind', 'here', "mcstate", "dust", "spimalot", "purrr",
               "stringr", "ggrepel", "naniar", "desplot", "rmarkdown",
-              "jtools", "DescTools", "car", "data.table")
+              "jtools", "DescTools", "car", "data.table", "reshape2",
+              "gridExtra", "ggpubr", "gdata", "philentropy")
 src <- conan::conan_sources(NULL,
                             repos = c("https://ncov-ic.r-universe.dev",
                                       "https://mrc-ide.r-universe.dev"))
@@ -40,7 +41,8 @@ fits <-
                                      parameters = list(region = x,
                                                        short_run = TRUE,
                                                        deterministic = TRUE,
-                                                       data_changed = "original"))})
+                                                       data_changed = "original",
+                                                       change_rate = 1))})
 batch <- fits$name
 
 ## Collect results
@@ -50,7 +52,8 @@ res <- obj$task_bundle_get(batch)$results()
 combined <- obj$enqueue(orderly2::orderly_run('severity_fits_combined',
                                               parameters = list(short_run = TRUE,
                                                                 deterministic = TRUE,
-                                                                data_changed = "original")))
+                                                                data_changed = "original",
+                                                                change_rate = 1)))
 combined_result <- combined$result()
 
 #----
@@ -63,7 +66,8 @@ fits <-
                                      parameters = list(region = x,
                                                        short_run = FALSE,
                                                        deterministic = TRUE,
-                                                       data_changed = "original"))})
+                                                       data_changed = "original",
+                                                       change_rate = 1))})
 batch <- fits$name
 
 ## Collect results
@@ -73,5 +77,6 @@ res <- obj$task_bundle_get(batch)$results()
 combined <- obj$enqueue(orderly2::orderly_run('severity_fits_combined',
                                               parameters = list(short_run = FALSE,
                                                                 deterministic = TRUE,
-                                                                data_changed = "original")))
+                                                                data_changed = "original",
+                                                                change_rate = 1)))
 combined_result <- combined$result()
