@@ -200,7 +200,19 @@ change_data <- function(data, data_changed,change_rate) {
         data[index,"ons_pos"]=NA
         data[index,"ons_tot"]=NA
       }else if(i=="react"){
-        index<-union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])),which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])),which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])),which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])),which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])),which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])),which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
+        tmp1=union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])))
+        tmp2=union(which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])))
+        tmp3=union(which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])))
+        tmp4=union(which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])))
+        tmp5=union(which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])))
+        tmp6=union(which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])))
+        tmp7=union(which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
+        tmp1=union(tmp1,tmp2)
+        tmp2=union(tmp3,tmp4)
+        tmp3=union(tmp5,tmp6)
+        tmp1=union(tmp1,tmp2)
+        tmp2=union(tmp3,tmp7)
+        index<-union(tmp1,tmp2)
         index=sample(index,length(index)*change_rate,replace = FALSE)
         data[index,"react_pos"]=NA
         data[index,"react_tot"]=NA
@@ -224,7 +236,7 @@ change_data <- function(data, data_changed,change_rate) {
         data[index,"strain_over25_tot"]=NA
         data[index,"strain_over25_non_variant"]=NA
       }else if(i=="sero"){
-        index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_tot_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])),which(!is.na(data[,"sero_tot_15_64_2"])))
+        index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])))
         index=sample(index,length(index)*change_rate,replace = FALSE)
         data[index,"sero_pos_15_64_1"]=NA
         data[index,"sero_pos_15_64_2"]=NA
@@ -319,7 +331,19 @@ change_data <- function(data, data_changed,change_rate) {
         data[index,"ons_pos"]=NA
         data[index,"ons_tot"]=NA
       }else if(i=="react"){
-        index<-union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])),which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])),which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])),which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])),which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])),which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])),which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
+        tmp1=union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])))
+        tmp2=union(which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])))
+        tmp3=union(which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])))
+        tmp4=union(which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])))
+        tmp5=union(which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])))
+        tmp6=union(which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])))
+        tmp7=union(which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
+        tmp1=union(tmp1,tmp2)
+        tmp2=union(tmp3,tmp4)
+        tmp3=union(tmp5,tmp6)
+        tmp1=union(tmp1,tmp2)
+        tmp2=union(tmp3,tmp7)
+        index<-union(tmp1,tmp2)
         index=sample(index,length(index)*change_rate[j],replace = FALSE)
         data[index,"react_pos"]=NA
         data[index,"react_tot"]=NA
@@ -343,7 +367,7 @@ change_data <- function(data, data_changed,change_rate) {
         data[index,"strain_over25_tot"]=NA
         data[index,"strain_over25_non_variant"]=NA
       }else if(i=="sero"){
-        index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_tot_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])),which(!is.na(data[,"sero_tot_15_64_2"])))
+        index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])))
         index=sample(index,length(index)*change_rate[j],replace = FALSE)
         data[index,"sero_pos_15_64_1"]=NA
         data[index,"sero_pos_15_64_2"]=NA
