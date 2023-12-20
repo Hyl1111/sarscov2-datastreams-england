@@ -8,3 +8,5 @@ archive
 .Rproj.user
 contexts
 .Rhistory
+slides/*_files
+*.html
