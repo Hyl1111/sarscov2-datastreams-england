@@ -605,3 +605,42 @@ get_convergence_diagnostic <- function(dat) {
   
   ret
 }
+
+
+get_R0_england <- function(dat) {
+  regions <- sircovid::regions("england")
+  variant_names <- names(dat$parameters$base[[1]]$strain_epochs)
+  
+  calc_R0_region <- function(r) {
+    pars <- dat$samples[[r]]$pars
+    
+    R0_variants <- list()
+    
+    for (nm in variant_names) {
+      if (nm == "Wildtype") {
+        R0 <- dat$rt[[r]]$Rt_general[1, "weighted", ]
+      } else {
+        R0 <- R0 * pars[, paste0("ta_", tolower(nm))]
+      }
+      R0_variants[[nm]] <- R0
+    }
+    R0_variants
+  }
+    
+  r0 <- lapply(regions, calc_R0_region)
+  names(r0) <- regions
+  
+  r0 <- spimalot:::list_transpose(r0)
+  
+  get_region_pop <- function(r) {
+    p <- dat$samples[[r]]$predict$transform(dat$samples[[r]]$pars[1, ])
+    sum(p[[1]]$pars$population)
+  }
+  
+  wts <- vapply(regions, get_region_pop, numeric(1))
+  
+  r0 <- lapply(r0, function(x) {
+    apply(spimalot:::abind_quiet(x, along = 2), 1, weighted.mean, w = wts)})
+  
+  r0
+}

@@ -120,6 +120,8 @@ model_demography <-
 saveRDS(model_demography, "outputs/model_demography.rds")
 write_csv(dat$intrinsic_severity, "outputs/intrinsic_severity.csv")
 
+R0 <- get_R0_england(dat)
+
 par_names <- colnames(dat$samples[[1]]$pars)
 
 subset_variants <- intersect(par_names,
