@@ -61,9 +61,21 @@ orderly2::orderly_artefact(
 orderly2::orderly_artefact("Files for forward simulation", "outputs/combined.rds")
 orderly2::orderly_artefact(
   "regional fitting plots and projections for comparison",
-  c("figs/beta.png", "figs/cumulative_attack_rate.png", "figs/data_fits.png", "figs/forest_plot_betas.png", "figs/forest_plot_misc.png", "figs/forest_plot_variants.png", "figs/forest_plot_tv_severity.png", "figs/incidence.png", "figs/incidence_per_1000.png", "figs/infections_per_strain.png", "figs/pillar2_all_ages.png", "figs/pillar2_over25.png", "figs/prevalence_react.png", "figs/prevalence_ons.png", "figs/Rt_eff_general.png", "figs/Rt_general.png", "figs/serology_euroimmun.png", "figs/serology_roche_n.png", "figs/status_effective_susceptible.png", "figs/status_infection.png", "figs/status_vaccine.png", "figs/variant_Wildtype_Alpha.png", "figs/variant_Alpha_Delta.png", "figs/variant_Delta_Omicron.png", "figs/mu_D.png", "figs/traceplot_east_of_england.png", "figs/traceplot_london.png", "figs/traceplot_midlands.png", "figs/traceplot_north_east_and_yorkshire.png", "figs/traceplot_north_west.png", "figs/traceplot_south_east.png", "figs/traceplot_south_west.png", "figs_by_age/pillar2_0_14.png", "figs_by_age/pillar2_15_24.png", "figs_by_age/pillar2_25_49.png", "figs_by_age/pillar2_50_64.png", "figs_by_age/pillar2_65_79.png", "figs_by_age/pillar2_80_plus.png", "figs_by_age/deaths_hosp_0_49.png", "figs_by_age/deaths_hosp_50_54.png", "figs_by_age/deaths_hosp_55_59.png", "figs_by_age/deaths_hosp_60_64.png", "figs_by_age/deaths_hosp_65_69.png", "figs_by_age/deaths_hosp_70_74.png", "figs_by_age/deaths_hosp_75_79.png", "figs_by_age/deaths_hosp_80_plus.png", "figs_by_age/deaths_comm_0_49.png", "figs_by_age/deaths_comm_50_54.png", "figs_by_age/deaths_comm_55_59.png", "figs_by_age/deaths_comm_60_64.png", "figs_by_age/deaths_comm_65_69.png", "figs_by_age/deaths_comm_70_74.png", "figs_by_age/deaths_comm_75_79.png", "figs_by_age/deaths_comm_80_plus.png", "figs_by_age/admissions_0_9.png", "figs_by_age/admissions_10_19.png", "figs_by_age/admissions_20_29.png", "figs_by_age/admissions_30_39.png", "figs_by_age/admissions_40_49.png", "figs_by_age/admissions_50_59.png", "figs_by_age/admissions_60_69.png", "figs_by_age/admissions_70_79.png", "figs_by_age/admissions_80_plus.png", "figs_by_age/react_5_24.png", "figs_by_age/react_25_34.png", "figs_by_age/react_35_44.png", "figs_by_age/react_45_54.png", "figs_by_age/react_55_64.png", "figs_by_age/react_65_plus.png", "zoomed_view/regions.png", "zoomed_view/prevalence_ons.png", "zoomed_view/prevalence_react.png", "zoomed_view/pillar2_over25.png", "paper_plots/paper_figure_1.png", "paper_plots/paper_figure_2.png", "paper_plots/suppl_age_heatmaps.png", "paper_plots/suppl_compare_demography.png", "paper_plots/suppl_emergence_demography.png", "paper_plots/suppl_compare_hfr.png", "paper_plots/suppl_regional_intrinsic.png", "paper_plots/suppl_deaths_hosp_age.png", "paper_plots/suppl_deaths_comm_age.png", "paper_plots/suppl_hosp_adm_age.png", "paper_plots/suppl_inf_prev_age.png", "paper_plots/suppl_pillar2_age.png", "paper_plots/suppl_admissions_vacc.png", "paper_plots/suppl_deaths_vacc.png"))
-#orderly2::orderly_artefact("regional fitting plots and projections for comparison","paper_plots/suppl_sev_winter_20_21.png",)
-
+  c("figs/beta.png", "figs/cumulative_attack_rate.png", "figs/data_fits.png", "figs/forest_plot_betas.png", "figs/forest_plot_misc.png", "figs/forest_plot_variants.png", "figs/forest_plot_tv_severity.png", "figs/incidence.png", "figs/incidence_per_1000.png", 
+    "figs/infections_per_strain.png", "figs/pillar2_all_ages.png", "figs/pillar2_over25.png", "figs/prevalence_react.png", 
+    "figs/prevalence_ons.png", "figs/Rt_eff_general.png", "figs/Rt_general.png", "figs/serology_euroimmun.png",
+    "figs/serology_roche_n.png", "figs/status_effective_susceptible.png", "figs/status_infection.png", "figs/status_vaccine.png", "figs/variant_Wildtype_Alpha.png", "figs/variant_Alpha_Delta.png", "figs/variant_Delta_Omicron.png", "figs/mu_D.png", 
+    "figs/traceplot_east_of_england.png", "figs/traceplot_london.png", "figs/traceplot_midlands.png", "figs/traceplot_north_east_and_yorkshire.png", "figs/traceplot_north_west.png", "figs/traceplot_south_east.png", "figs/traceplot_south_west.png", "figs_by_age/pillar2_0_14.png","figs_by_age/pillar2_15_24.png", "figs_by_age/pillar2_25_49.png", "figs_by_age/pillar2_50_64.png", "figs_by_age/pillar2_65_79.png", 
+    "figs_by_age/pillar2_80_plus.png", "figs_by_age/deaths_hosp_0_49.png", "figs_by_age/deaths_hosp_50_54.png", "figs_by_age/deaths_hosp_55_59.png", "figs_by_age/deaths_hosp_60_64.png", "figs_by_age/deaths_hosp_65_69.png", 
+    "figs_by_age/deaths_hosp_70_74.png", "figs_by_age/deaths_hosp_75_79.png", "figs_by_age/deaths_hosp_80_plus.png", "figs_by_age/deaths_comm_0_49.png", 
+    "figs_by_age/deaths_comm_50_54.png", "figs_by_age/deaths_comm_55_59.png", "figs_by_age/deaths_comm_60_64.png", "figs_by_age/deaths_comm_65_69.png", "figs_by_age/deaths_comm_70_74.png", "figs_by_age/deaths_comm_75_79.png", 
+    "figs_by_age/deaths_comm_80_plus.png", "figs_by_age/admissions_0_9.png", "figs_by_age/admissions_10_19.png", "figs_by_age/admissions_20_29.png", "figs_by_age/admissions_30_39.png", "figs_by_age/admissions_40_49.png", "figs_by_age/admissions_50_59.png", "figs_by_age/admissions_60_69.png", "figs_by_age/admissions_70_79.png", "figs_by_age/admissions_80_plus.png", "figs_by_age/react_5_24.png", "figs_by_age/react_25_34.png", "figs_by_age/react_35_44.png", "figs_by_age/react_45_54.png", "figs_by_age/react_55_64.png", "figs_by_age/react_65_plus.png", "zoomed_view/regions.png", "zoomed_view/prevalence_ons.png", "zoomed_view/prevalence_react.png", "zoomed_view/pillar2_over25.png", 
+    "paper_plots/suppl_compare_demography.png", "paper_plots/suppl_emergence_demography.png", "paper_plots/suppl_deaths_hosp_age.png", "paper_plots/suppl_deaths_comm_age.png", "paper_plots/suppl_hosp_adm_age.png", "paper_plots/suppl_inf_prev_age.png", "paper_plots/suppl_pillar2_age.png"))
+#orderly2::orderly_artefact("regional fitting plots and projections for comparison","paper_plots/suppl_sev_winter_20_21.png","paper_plots/paper_figure_1.png", "paper_plots/paper_figure_2.png", "paper_plots/suppl_age_heatmaps.png", "paper_plots/suppl_compare_hfr.png", "paper_plots/suppl_regional_intrinsic.png", "paper_plots/suppl_admissions_vacc.png", "paper_plots/suppl_deaths_vacc.png")
+orderly2::orderly_artefact("Gelman-Rubin & ESS","outputs/diagnostics.rds")
+orderly2::orderly_artefact("R0","outputs/R0.rds")
+orderly2::orderly_artefact("engaland intrinsic severity data","outputs/england_intrinsic_severity.rds")
+orderly2::orderly_artefact("england severity data","outputs/england_severity.rds")
 
 library(sircovid)
 library(spimalot)
@@ -114,6 +126,8 @@ saveRDS(dat$data, "outputs/aggregated_data.rds")
 saveRDS(dat$rt$england, "regional_results/Rt_england.rds")
 saveRDS(dat$rt, "regional_results/Rt_all.rds")
 saveRDS(dat$onward, "outputs/combined.rds")
+saveRDS(dat$intrinsic_severity_raw$england,"outputs/england_intrinsic_severity.rds")
+saveRDS(dat$severity$england,"outputs/england_severity.rds")
 spimalot::spim_pars_pmcmc_save(dat$parameters, "outputs/parameters")
 
 model_demography <-
@@ -123,6 +137,7 @@ saveRDS(model_demography, "outputs/model_demography.rds")
 write_csv(dat$intrinsic_severity, "outputs/intrinsic_severity.csv")
 
 R0 <- get_R0_england(dat)
+saveRDS(R0,"outputs/R0.rds")
 
 par_names <- colnames(dat$samples[[1]]$pars)
 
@@ -384,23 +399,23 @@ names(national_severity) <- periods
 saveRDS(national_severity, "outputs/national_severity.rds")
 
 # Paper plots
-png("paper_plots/paper_figure_1.png", units = "in", width = 16.5, height = 10, res = 300)
-paper_plot_1(dat, "england", vam_data)
-dev.off()
+#png("paper_plots/paper_figure_1.png", units = "in", width = 16.5, height = 10, res = 300)
+#paper_plot_1(dat, "england", vam_data)
+#dev.off()
 
-png("paper_plots/paper_figure_2.png", units = "in", width = 16.5, height = 10, res = 300)
-paper_plot_2(dat, "england", strain_epochs, vam_data, age_bands_select = TRUE)
-dev.off()
+#png("paper_plots/paper_figure_2.png", units = "in", width = 16.5, height = 10, res = 300)
+#paper_plot_2(dat, "england", strain_epochs, vam_data, age_bands_select = TRUE)
+#dev.off()
 
 
 ## Supplement plots
-png("paper_plots/suppl_age_heatmaps.png", units = "in", width = 18, height = 15, res = 300)
-suppl_age_heatmaps(dat, "england", vam_data)
-dev.off()
+#png("paper_plots/suppl_age_heatmaps.png", units = "in", width = 18, height = 15, res = 300)
+#suppl_age_heatmaps(dat, "england", vam_data)
+#dev.off()
 
-png("paper_plots/suppl_regional_intrinsic.png", units = "in", width = 11, height = 11, res = 300)
-suppl_regional_intrinsic(dat, "england", "Emergence3", strain_epochs, vam_data)
-dev.off()
+#png("paper_plots/suppl_regional_intrinsic.png", units = "in", width = 11, height = 11, res = 300)
+#suppl_regional_intrinsic(dat, "england", "Emergence3", strain_epochs, vam_data)
+#dev.off()
 
 png("paper_plots/suppl_compare_demography.png", units = "in", width = 10, height = 10, res = 300)
 suppl_compare_demography(dat, "england")
@@ -410,9 +425,9 @@ png("paper_plots/suppl_emergence_demography.png", units = "in", width = 10, heig
 suppl_emergence_demography(dat, "england")
 dev.off()
 
-png("paper_plots/suppl_compare_hfr.png", units = "in", width = 10, height = 10, res = 300)
-suppl_compare_hfr(dat, hfr_week, vam_data, strain_epochs)
-dev.off()
+#png("paper_plots/suppl_compare_hfr.png", units = "in", width = 10, height = 10, res = 300)
+#suppl_compare_hfr(dat, hfr_week, vam_data, strain_epochs)
+#dev.off()
 
 #sev_winter <- suppl_sev_winter_20_21(dat, england_data, hfr_data, strain_epochs, "HFR",
 #                       as.Date("2020-09-01"), xmax = as.Date("2021-03-01"))
@@ -454,13 +469,16 @@ write_png("paper_plots/suppl_pillar2_age.png", width = 2400, height = 1200, res 
             date_min = as.Date("2020-05-15"), ymax = 60,
             title = "Pillar 2 positivity (new infections) - England"))
 
-png("paper_plots/suppl_admissions_vacc.png", units = "in", width = 14, height = 10, res = 300)
-suppl_outcomes_vacc_status(dat, outcomes_vacc_status, "diagnoses_vacc")
-dev.off()
+#png("paper_plots/suppl_admissions_vacc.png", units = "in", width = 14, height = 10, res = 300)
+#suppl_outcomes_vacc_status(dat, outcomes_vacc_status, "diagnoses_vacc")
+#dev.off()
 
-png("paper_plots/suppl_deaths_vacc.png", units = "in", width = 14, height = 10, res = 300)
-suppl_outcomes_vacc_status(dat, outcomes_vacc_status, "D_hosp_vacc")
-dev.off()
+#png("paper_plots/suppl_deaths_vacc.png", units = "in", width = 14, height = 10, res = 300)
+#suppl_outcomes_vacc_status(dat, outcomes_vacc_status, "D_hosp_vacc")
+#dev.off()
 
 ## Render rmd
 #rmarkdown::render("paper_numbers.Rmd")
+
+diagnostics <- get_convergence_diagnostic(dat)
+saveRDS(diagnostics, "outputs/diagnostics.rds")
