@@ -119,29 +119,20 @@ change_data <- function(data, data_changed,change_rate) {
   }else if(length(change_rate)==1) {
     for (i in data_changed){
       if(i=="deaths_hosp"){
+        change_cols <- 
+          c("deaths_hosp", "deaths_hosp_0_49", "deaths_hosp_50_54", "deaths_hosp_55_59", 
+            "deaths_hosp_60_64", "deaths_hosp_65_69", "deaths_hosp_70_74", "deaths_hosp_75_79", 
+            "deaths_hosp_80_plus")
         index<-which(!is.na(data[,"deaths_hosp_0_49"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"deaths_hosp"]=NA
-        data[index,"deaths_hosp_0_49"]=NA
-        data[index,"deaths_hosp_50_54"]=NA
-        data[index,"deaths_hosp_55_59"]=NA
-        data[index,"deaths_hosp_60_64"]=NA
-        data[index,"deaths_hosp_65_69"]=NA
-        data[index,"deaths_hosp_70_74"]=NA
-        data[index,"deaths_hosp_75_79"]=NA
-        data[index,"deaths_hosp_80_plus"]=NA
+        data[index,change_cols]=NA
       }else if(i=="deaths_comm"){
+        change_cols <- c("deaths_comm","deaths_comm_0_49","deaths_comm_50_54","deaths_comm_55_59",
+                         "deaths_comm_60_64","deaths_comm_65_69","deaths_comm_70_74","deaths_comm_75_79",
+                         "deaths_comm_80_plus")
         index<-which(!is.na(data[,"deaths_comm_0_49"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"deaths_comm"]=NA
-        data[index,"deaths_comm_0_49"]=NA
-        data[index,"deaths_comm_50_54"]=NA
-        data[index,"deaths_comm_55_59"]=NA
-        data[index,"deaths_comm_60_64"]=NA
-        data[index,"deaths_comm_65_69"]=NA
-        data[index,"deaths_comm_70_74"]=NA
-        data[index,"deaths_comm_75_79"]=NA
-        data[index,"deaths_comm_80_plus"]=NA
+        data[index,change_cols]=NA
       }else if(i=="icu"){
         index<-which(!is.na(data[,"icu"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
@@ -155,230 +146,51 @@ change_data <- function(data, data_changed,change_rate) {
         index=sample(index,length(index)*change_rate,replace = FALSE)
         data[index,"hosp"]=NA
       }else if(i=="all_admission"){
+        change_cols=c("all_admission","all_admission_0_9","all_admission_10_19","all_admission_20_29",
+                      "all_admission_30_39","all_admission_40_49","all_admission_50_59","all_admission_60_69",
+                      "all_admission_70_79","all_admission_80_plus")
         index<-which(!is.na(data[,"all_admission_0_9"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"all_admission"]=NA
-        data[index,"all_admission_0_9"]=NA
-        data[index,"all_admission_10_19"]=NA
-        data[index,"all_admission_20_29"]=NA
-        data[index,"all_admission_30_39"]=NA
-        data[index,"all_admission_40_49"]=NA
-        data[index,"all_admission_50_59"]=NA
-        data[index,"all_admission_60_69"]=NA
-        data[index,"all_admission_70_79"]=NA
-        data[index,"all_admission_80_plus"]=NA
+        data[index,change_cols]=NA
       }else if(i=="pillar2"){
         index<-which(!is.na(data[,"pillar2_15_24_tot"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"pillar2_tot"]=NA
-        data[index,"pillar2_pos"]=NA
-        data[index,"pillar2_cases"]=NA
-        data[index,"pillar2_over25_tot"]=NA
-        data[index,"pillar2_over25_pos"]=NA
-        data[index,"pillar2_over25_cases"]=NA
-        data[index,"pillar2_under15_tot"]=NA
-        data[index,"pillar2_under15_pos"]=NA
-        data[index,"pillar2_under15_cases"]=NA
-        data[index,"pillar2_15_24_tot"]=NA
-        data[index,"pillar2_15_24_pos"]=NA
-        data[index,"pillar2_15_24_cases"]=NA
-        data[index,"pillar2_25_49_tot"]=NA
-        data[index,"pillar2_25_49_pos"]=NA
-        data[index,"pillar2_25_49_cases"]=NA
-        data[index,"pillar2_50_64_tot"]=NA
-        data[index,"pillar2_50_64_pos"]=NA
-        data[index,"pillar2_50_64_cases"]=NA
-        data[index,"pillar2_65_79_tot"]=NA
-        data[index,"pillar2_65_79_pos"]=NA
-        data[index,"pillar2_65_79_cases"]=NA
-        data[index,"pillar2_80_plus_tot"]=NA
-        data[index,"pillar2_80_plus_pos"]=NA
-        data[index,"pillar2_80_plus_cases"]=NA
+        change_cols=c("pillar2_tot","pillar2_pos","pillar2_cases","pillar2_over25_tot",
+                      "pillar2_over25_pos","pillar2_over25_cases","pillar2_under15_tot",
+                      "pillar2_under15_pos","pillar2_under15_cases","pillar2_15_24_tot",
+                      "pillar2_15_24_pos","pillar2_15_24_cases","pillar2_25_49_tot",
+                      "pillar2_25_49_pos","pillar2_25_49_cases","pillar2_50_64_tot",
+                      "pillar2_50_64_pos","pillar2_50_64_cases","pillar2_65_79_tot",
+                      "pillar2_65_79_pos","pillar2_65_79_cases","pillar2_80_plus_tot",
+                      "pillar2_80_plus_pos","pillar2_80_plus_cases")
+        data[index,change_cols]=NA
       }else if(i=="ons"){
         index<-which(!is.na(data[,"ons_pos"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"ons_pos"]=NA
-        data[index,"ons_tot"]=NA
+        data[index,c("ons_pos","ons_tot")]=NA
       }else if(i=="react"){
-        tmp1=union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])))
-        tmp2=union(which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])))
-        tmp3=union(which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])))
-        tmp4=union(which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])))
-        tmp5=union(which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])))
-        tmp6=union(which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])))
-        tmp7=union(which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
-        tmp1=union(tmp1,tmp2)
-        tmp2=union(tmp3,tmp4)
-        tmp3=union(tmp5,tmp6)
-        tmp1=union(tmp1,tmp2)
-        tmp2=union(tmp3,tmp7)
-        index<-union(tmp1,tmp2)
-        index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"react_pos"]=NA
-        data[index,"react_tot"]=NA
-        data[index,"react_5_24_pos"]=NA
-        data[index,"react_5_24_tot"]=NA
-        data[index,"react_25_34_pos"]=NA
-        data[index,"react_25_34_tot"]=NA
-        data[index,"react_35_44_pos"]=NA
-        data[index,"react_35_44_tot"]=NA
-        data[index,"react_45_54_pos"]=NA
-        data[index,"react_45_54_tot"]=NA
-        data[index,"react_55_64_pos"]=NA
-        data[index,"react_55_64_tot"]=NA
-        data[index,"react_65_plus_pos"]=NA
-        data[index,"react_65_plus_tot"]=NA
+        change_cols <- 
+          c("react_pos", "react_tot", "react_5_24_pos", "react_5_24_tot", 
+            "react_25_34_pos", "react_25_34_tot", "react_35_44_pos", "react_35_44_tot", 
+            "react_45_54_pos", "react_45_54_tot", "react_55_64_pos", "react_55_64_tot", 
+            "react_65_plus_pos", "react_65_plus_tot")
+        index <- which(rowSums(!is.na(data[, change_cols])) > 0)
+        index <- sample(index, length(index) * change_rate, replace = FALSE)
+        data[index, change_cols] <- NA
       }else if(i=="strain"){
         index<-which(!is.na(data[,"strain_non_variant"]))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"strain_non_variant"]=NA
-        data[index,"strain_tot"]=NA
-        data[index,"strain_over25_tot"]=NA
-        data[index,"strain_over25_non_variant"]=NA
+        data[index,c("strain_non_variant","strain_tot","strain_over25_tot","strain_over25_non_variant")]=NA
       }else if(i=="sero"){
         index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])))
         index=sample(index,length(index)*change_rate,replace = FALSE)
-        data[index,"sero_pos_15_64_1"]=NA
-        data[index,"sero_pos_15_64_2"]=NA
-        data[index,"sero_tot_15_64_1"]=NA
-        data[index,"sero_tot_15_64_2"]=NA
-      }else{
-        stop("Please check the name of the data stream")
-      }
-    }
-  }else if(length(data_changed)==length(change_rate)){
-    for (j in 1:length(data_changed)){
-      i=data_changed[j]
-      if(i=="death_hosp"){
-        index<-which(!is.na(data[,"deaths_hosp_0_49"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"deaths_hosp"]=NA
-        data[index,"deaths_hosp_0_49"]=NA
-        data[index,"deaths_hosp_50_54"]=NA
-        data[index,"deaths_hosp_55_59"]=NA
-        data[index,"deaths_hosp_60_64"]=NA
-        data[index,"deaths_hosp_65_69"]=NA
-        data[index,"deaths_hosp_70_74"]=NA
-        data[index,"deaths_hosp_75_79"]=NA
-        data[index,"deaths_hosp_80_plus"]=NA
-      }else if(i=="deaths_comm"){
-        index<-which(!is.na(data[,"deaths_comm_0_49"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"deaths_comm"]=NA
-        data[index,"deaths_comm_0_49"]=NA
-        data[index,"deaths_comm_50_54"]=NA
-        data[index,"deaths_comm_55_59"]=NA
-        data[index,"deaths_comm_60_64"]=NA
-        data[index,"deaths_comm_65_69"]=NA
-        data[index,"deaths_comm_70_74"]=NA
-        data[index,"deaths_comm_75_79"]=NA
-        data[index,"deaths_comm_80_plus"]=NA
-      }else if(i=="icu"){
-        index<-which(!is.na(data[,"icu"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"icu"]=NA
-      }else if(i=="general"){
-        index<-which(!is.na(data[,"general"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"general"]=NA
-      }else if(i=="hosp"){
-        index<-which(!is.na(data[,"hosp"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"hosp"]=NA
-      }else if(i=="all_admission"){
-        index<-which(!is.na(data[,"all_admission_0_9"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"all_admission"]=NA
-        data[index,"all_admission_0_9"]=NA
-        data[index,"all_admission_10_19"]=NA
-        data[index,"all_admission_20_29"]=NA
-        data[index,"all_admission_30_39"]=NA
-        data[index,"all_admission_40_49"]=NA
-        data[index,"all_admission_50_59"]=NA
-        data[index,"all_admission_60_69"]=NA
-        data[index,"all_admission_70_79"]=NA
-        data[index,"all_admission_80_plus"]=NA
-      }else if(i=="pillar2"){
-        index<-which(!is.na(data[,"pillar2_15_24_tot"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"pillar2_tot"]=NA
-        data[index,"pillar2_pos"]=NA
-        data[index,"pillar2_cases"]=NA
-        data[index,"pillar2_over25_tot"]=NA
-        data[index,"pillar2_over25_pos"]=NA
-        data[index,"pillar2_over25_cases"]=NA
-        data[index,"pillar2_under15_tot"]=NA
-        data[index,"pillar2_under15_pos"]=NA
-        data[index,"pillar2_under15_cases"]=NA
-        data[index,"pillar2_15_24_tot"]=NA
-        data[index,"pillar2_15_24_pos"]=NA
-        data[index,"pillar2_15_24_cases"]=NA
-        data[index,"pillar2_25_49_tot"]=NA
-        data[index,"pillar2_25_49_pos"]=NA
-        data[index,"pillar2_25_49_cases"]=NA
-        data[index,"pillar2_50_64_tot"]=NA
-        data[index,"pillar2_50_64_pos"]=NA
-        data[index,"pillar2_50_64_cases"]=NA
-        data[index,"pillar2_65_79_tot"]=NA
-        data[index,"pillar2_65_79_pos"]=NA
-        data[index,"pillar2_65_79_cases"]=NA
-        data[index,"pillar2_80_plus_tot"]=NA
-        data[index,"pillar2_80_plus_pos"]=NA
-        data[index,"pillar2_80_plus_cases"]=NA
-      }else if(i=="ons"){
-        index<-which(!is.na(data[,"ons_pos"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"ons_pos"]=NA
-        data[index,"ons_tot"]=NA
-      }else if(i=="react"){
-        tmp1=union(which(!is.na(data[,"react_pos"])),which(!is.na(data[,"react_tot"])))
-        tmp2=union(which(!is.na(data[,"react_5_24_pos"])),which(!is.na(data[,"react_5_24_tot"])))
-        tmp3=union(which(!is.na(data[,"react_25_34_pos"])),which(!is.na(data[,"react_25_34_tot"])))
-        tmp4=union(which(!is.na(data[,"react_35_44_pos"])),which(!is.na(data[,"react_35_44_tot"])))
-        tmp5=union(which(!is.na(data[,"react_45_54_pos"])),which(!is.na(data[,"react_45_54_tot"])))
-        tmp6=union(which(!is.na(data[,"react_55_64_pos"])),which(!is.na(data[,"react_55_64_tot"])))
-        tmp7=union(which(!is.na(data[,"react_65_plus_pos"])),which(!is.na(data[,"react_65_plus_tot"])))
-        tmp1=union(tmp1,tmp2)
-        tmp2=union(tmp3,tmp4)
-        tmp3=union(tmp5,tmp6)
-        tmp1=union(tmp1,tmp2)
-        tmp2=union(tmp3,tmp7)
-        index<-union(tmp1,tmp2)
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"react_pos"]=NA
-        data[index,"react_tot"]=NA
-        data[index,"react_5_24_pos"]=NA
-        data[index,"react_5_24_tot"]=NA
-        data[index,"react_25_34_pos"]=NA
-        data[index,"react_25_34_tot"]=NA
-        data[index,"react_35_44_pos"]=NA
-        data[index,"react_35_44_tot"]=NA
-        data[index,"react_45_54_pos"]=NA
-        data[index,"react_45_54_tot"]=NA
-        data[index,"react_55_64_pos"]=NA
-        data[index,"react_55_64_tot"]=NA
-        data[index,"react_65_plus_pos"]=NA
-        data[index,"react_65_plus_tot"]=NA
-      }else if(i=="strain"){
-        index<-which(!is.na(data[,"strain_non_variant"]))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"strain_non_variant"]=NA
-        data[index,"strain_tot"]=NA
-        data[index,"strain_over25_tot"]=NA
-        data[index,"strain_over25_non_variant"]=NA
-      }else if(i=="sero"){
-        index<-union(which(!is.na(data[,"sero_pos_15_64_1"])),which(!is.na(data[,"sero_pos_15_64_2"])))
-        index=sample(index,length(index)*change_rate[j],replace = FALSE)
-        data[index,"sero_pos_15_64_1"]=NA
-        data[index,"sero_pos_15_64_2"]=NA
-        data[index,"sero_tot_15_64_1"]=NA
-        data[index,"sero_tot_15_64_2"]=NA
+        data[index,c("sero_pos_15_64_1","sero_pos_15_64_2","sero_tot_15_64_1","sero_tot_15_64_2")]=NA
       }else{
         stop("Please check the name of the data stream")
       }
     }
   }else{
-    stop("The length of change_rate should equal to either 1 or the length of data_changed")
+    stop("The length of change_rate should be 1")
   }
 
   data
