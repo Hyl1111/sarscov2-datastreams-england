@@ -247,12 +247,13 @@ get_r0_region <- function(dat, r) {
     Wildtype <- dat$rt[[r]]$Rt_general[1, "weighted", ]
     Alpha <- Wildtype * pars[, "ta_alpha"]
     Delta <- Alpha * pars[, "ta_delta"]
-    Omicron <- Delta * pars[, "ta_omicron"]
+    #Omicron <- Delta * pars[, "ta_omicron"]
     
     list(Wildtype = Wildtype,
          Alpha = Alpha,
-         Delta = Delta,
-         Omicron = Omicron)
+         Delta = Delta
+         #,Omicron = Omicron
+         )
   }
   
   if (r == "england") {
@@ -284,8 +285,8 @@ get_r0_region <- function(dat, r) {
   data.frame(
     Wildtype = summary_vector(r0$Wildtype),
     Alpha = summary_vector(r0$Alpha),
-    Delta = summary_vector(r0$Delta),
-    Omicron = summary_vector(r0$Omicron)
+    Delta = summary_vector(r0$Delta)
+    #,Omicron = summary_vector(r0$Omicron)
   ) %>%
   mutate(value = c("mean", "lb", "ub"),
          region = r,
