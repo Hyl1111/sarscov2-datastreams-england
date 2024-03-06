@@ -9,7 +9,7 @@ orderly2::orderly_dependency(
     "data/serology.csv" = "outputs/serology_for_inference.csv"))
 orderly2::orderly_dependency(
   "severity_parameters",
-  "latest(parameter:data_changed == this:data_changed && parameter:deterministic == this:deterministic)",
+  "latest(parameter:data_changed == this:data_changed && parameter:deterministic == this:deterministic && parameter:change_rate == this:change_rate)",
   c("parameters/base.rds" = "parameters_base.rds",
     "parameters/info.csv" = "parameters_info.csv",
     "parameters/prior.csv" = "parameters_prior.csv",
@@ -34,7 +34,7 @@ source("global_util.R")
 version_check("sircovid", "0.15.0")
 version_check("spimalot", "0.8.25")
 
-date <- "2022-02-24"
+date <- "2021-09-13"
 assumptions <- "central"
 
 ## We're effectively NOT trimming any data stream as backfill is not an issue here
