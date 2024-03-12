@@ -1,11 +1,11 @@
-orderly2::orderly_parameters(data_changed = "original", deterministic = TRUE)
+orderly2::orderly_parameters(data_changed = "original", deterministic = TRUE, change_rate=1)
 
 orderly2::orderly_shared_resource(global_util.R = "rtm_inference/util_new.R")
 
-orderly2::orderly_resource(c("pars/original/deterministic/info.csv",
-                             "pars/original/deterministic/proposal.csv",
-                             "pars/original/stochastic/info.csv",
-                             "pars/original/stochastic/proposal.csv",
+orderly2::orderly_resource(c("pars/1/original/deterministic/info.csv",
+                             "pars/1/original/deterministic/proposal.csv",
+                             "pars/1/original/stochastic/info.csv",
+                             "pars/1/original/stochastic/proposal.csv",
                              "data/vaccine_efficacy_alpha.csv",
                              "data/vaccine_efficacy_delta.csv",
                              "data/vaccine_efficacy_omicron.csv",
@@ -49,7 +49,7 @@ version_check("sircovid", "0.15.0")
 version_check("spimalot", "0.8.25")
 
 ## Define date at which the data is capped for analysis
-date <- "2022-02-24"
+date <- "2021-09-13"
 assumptions <- "central"
 
 ## Five epochs after starting with a single strain model (without vaccination)
@@ -63,7 +63,7 @@ epoch_dates <- c("2020-09-17", "2020-12-07", "2021-03-08", "2021-09-14", "2021-1
 
 ## Load all parameters from the last run; creates priors, and updates
 ## new entries into the proposal matrix as needed.
-pars <- load_mcmc_parameters(data_changed, deterministic)
+pars <- load_mcmc_parameters(data_changed, deterministic, change_rate)
 
 ## The baselines are always region-specific
 regions <- sircovid::regions("england")
@@ -91,3 +91,4 @@ message("Printing supplementary figures")
 png("fig_sup_vacc_age.png", units = "in", width = 6, height = 6, res = 300)
 supl_fig_vac_age()
 dev.off()
+
